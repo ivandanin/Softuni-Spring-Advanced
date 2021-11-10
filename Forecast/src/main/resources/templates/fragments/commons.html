@@ -19,7 +19,7 @@
 <header th:fragment="navigation">
     <nav class="main-nav">
         <ul>
-            <th:block th:if="${@currentUser.id == null}">
+<!--            <th:block th:if="${@currentUser.id == null}">-->
                 <li>
                     <a href="/">Home</a>
                 </li>
@@ -32,16 +32,16 @@
                 <li>
                     <a href="/about">About</a>
                 </li>
-            </th:block>
-            <th:block th:unless="${@currentUser.id == null}">
+<!--            </th:block>-->
+<!--            <th:block th:unless="${@currentUser.id == null}">-->
                 <li>
-                    <a th:href="@{/users/profile/{id}(id = *{@currentUser.id})}">
+                    <a> <!-- th:href="@{/users/profile/{id}(id = *{@currentUser.id})}" --> >
                         Profile</a>
                 </li>
                 <li>
                     <a href="/users/logout">Logout</a>
                 </li>
-            </th:block>
+<!--            </th:block>-->
         </ul>
     </nav>
 </header>
