@@ -1,6 +1,6 @@
 package com.example.forecast.models.entityModels.enums;
 
-public enum UserEnum {
+public enum RoleEnum {
     USER,
     ADMIN
 }

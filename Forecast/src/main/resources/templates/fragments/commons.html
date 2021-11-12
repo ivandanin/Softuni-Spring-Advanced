@@ -3,7 +3,7 @@
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Pathfinder</title>
+    <title>Forecast</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/mobile.css">
@@ -18,30 +18,38 @@
 </head><body>
 <header th:fragment="navigation">
     <nav class="main-nav">
+            <h1 class="border-bottom mb-5">Forecast</h1>
         <ul>
-<!--            <th:block th:if="${@currentUser.id == null}">-->
+             <th:block th:if="${@currentUser.id == null}">
                 <li>
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/users/login">Login</a>
+                    <a th:href="@{/users/login}">Login</a>
                 </li>
                 <li>
-                    <a href="/users/register">Register</a>
+                    <a th:href="@{/users/register}">Register</a>
                 </li>
+                </th:block>
+                <th:block th:unless="${@currentUser.id == null}">
                 <li>
-                    <a href="/about">About</a>
-                </li>
-<!--            </th:block>-->
-<!--            <th:block th:unless="${@currentUser.id == null}">-->
-                <li>
-                    <a> <!-- th:href="@{/users/profile/{id}(id = *{@currentUser.id})}" --> >
+                    <a th:href="@{/users/profile/{id}(id = *{@currentUser.id})}">
                         Profile</a>
                 </li>
+            <li><a>24-hour</a></li>
+            <li><a>Today</a></li>
+            <li><a>3 days</a></li>
+            <li><a>5 days</a></li>
+            <li><a>10 days</a></li>
+            <li><a>30 days</a></li>
                 <li>
-                    <a href="/users/logout">Logout</a>
+                    <a th:href="@{/users/logout}">Logout</a>
                 </li>
-<!--            </th:block>-->
+            </th:block>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
         </ul>
     </nav>
 </header>
