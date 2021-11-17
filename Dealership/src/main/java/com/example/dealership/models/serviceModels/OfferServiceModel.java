@@ -4,10 +4,13 @@ import com.example.dealership.models.entityModels.enums.EngineEnum;
 import com.example.dealership.models.entityModels.enums.TransmissionEnum;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+
 
 public class OfferServiceModel {
     private Long id;
-    private Long modelId;
+    private String brand;
+    private String model;
     private String description;
     private EngineEnum engine;
     private String imageUrl;
@@ -15,6 +18,9 @@ public class OfferServiceModel {
     private BigDecimal price;
     private TransmissionEnum transmission;
     private Integer year;
+
+    public OfferServiceModel() {
+    }
 
     public Long getId() {
         return id;
@@ -25,12 +31,21 @@ public class OfferServiceModel {
         return this;
     }
 
-    public Long getModelId() {
-        return modelId;
+    public String getBrand() {
+        return brand;
     }
 
-    public OfferServiceModel setModelId(Long modelId) {
-        this.modelId = modelId;
+    public OfferServiceModel setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public OfferServiceModel setModel(String model) {
+        this.model = model;
         return this;
     }
 

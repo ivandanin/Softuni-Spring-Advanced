@@ -7,8 +7,11 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class OfferBindingModel {
+
+    private Long id;
+    private String brand;
     @NotNull
-    private Long modelId;
+    private String model;
     @NotNull
     @DecimalMin("100")
     private BigDecimal price;
@@ -27,12 +30,30 @@ public class OfferBindingModel {
     @NotEmpty
     private String imageUrl;
 
-    public Long getModelId() {
-        return modelId;
+    public Long getId() {
+        return id;
     }
 
-    public OfferBindingModel setModelId(Long modelId) {
-        this.modelId = modelId;
+    public OfferBindingModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public OfferBindingModel setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public OfferBindingModel setModel(String model) {
+        this.model = model;
         return this;
     }
 

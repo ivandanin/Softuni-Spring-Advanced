@@ -1,6 +1,6 @@
 package com.example.dealership.services;
 
-import com.example.dealership.models.entityModels.Offer;
+import com.example.dealership.models.bindingModels.OfferBindingModel;
 import com.example.dealership.models.serviceModels.OfferServiceModel;
 import com.example.dealership.models.viewModels.OfferSummaryView;
 

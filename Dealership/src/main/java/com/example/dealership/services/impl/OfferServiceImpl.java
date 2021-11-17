@@ -16,12 +16,10 @@ public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository offerRepository;
     private final ModelMapper modelMapper;
-    private final BrandService brandService;
 
-    public OfferServiceImpl(OfferRepository offerRepository, ModelMapper modelMapper, BrandService brandService) {
+    public OfferServiceImpl(OfferRepository offerRepository, ModelMapper modelMapper) {
         this.offerRepository = offerRepository;
         this.modelMapper = modelMapper;
-        this.brandService = brandService;
     }
 
     @Override
@@ -48,7 +46,8 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public void addOffer(OfferServiceModel offerServiceModel) {
-        Offer offer = modelMapper.map(offerServiceModel, Offer.class);
+        Offer newOffer = modelMapper.map(offerServiceModel, Offer.class);
+        offerRepository.save(newOffer);
 
     }
 }
