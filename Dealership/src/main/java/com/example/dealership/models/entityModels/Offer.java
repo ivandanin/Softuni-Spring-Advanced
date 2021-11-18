@@ -24,10 +24,10 @@ public class Offer extends BaseEntity {
     private TransmissionEnum transmission;
     private Integer manufactureYear;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Brand brand;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ModelEntity model;
 
     public String getDescription() {

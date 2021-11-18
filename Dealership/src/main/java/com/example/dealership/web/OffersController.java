@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/offers")
 public class OffersController {
 
     private final OfferService offerService;
@@ -26,21 +28,24 @@ public class OffersController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/offers/all")
+    @GetMapping("/all")
     public String allOffers(Model model) {
-        model.addAttribute("offers", offerService.getAllOffers());
+        model.addAttribute("offer", offerService.getAllOffers());
         return "offers";
     }
 
-    @GetMapping("/offers/add")
+    @ModelAttribute
+    public OfferBindingModel offerBindingModel() {
+        return new OfferBindingModel();
+    }
+
+    @GetMapping("/add")
     public String addOffer(Model model) {
-        if(!model.containsAttribute("offerBindingModel")){
-            model.addAttribute("offerBindingModel", new OfferBindingModel());
-        }
+
             return "add-offer";
     }
 
-    @PostMapping("/offers/add")
+    @PostMapping("/add")
     public String addOffer(@Valid OfferBindingModel offerBindingModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
@@ -53,3 +58,4 @@ public class OffersController {
         return "redirect:/";
     }
 }
+

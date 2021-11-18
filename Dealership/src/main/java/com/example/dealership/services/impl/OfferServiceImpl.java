@@ -47,7 +47,7 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void addOffer(OfferServiceModel offerServiceModel) {
         Offer newOffer = modelMapper.map(offerServiceModel, Offer.class);
-        offerRepository.save(newOffer);
+        offerRepository.saveAndFlush(newOffer);
 
     }
 }

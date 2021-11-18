@@ -26,7 +26,7 @@
 
       <div class="form-group col-md-6 mb-3">
         <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
-        <input th:field="*{brand}"
+        <input th:field="*{brand}" th:errorclass="bg-danger"
                required minlength="2" maxlength="10"
                type="text" class="form-control text-center" id="brand" aria-describedby="nameHelp"
                name="name"/>
