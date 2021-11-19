@@ -1,12 +1,10 @@
 package com.example.dealership.web;
 
-import com.example.dealership.models.bindingModels.OfferBindingModel;
+import com.example.dealership.models.bindingModels.OfferAddBindingModel;
 import com.example.dealership.models.serviceModels.OfferServiceModel;
 import com.example.dealership.services.OfferService;
-import com.example.dealership.services.BrandService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +17,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/offers")
 public class OffersController {
-
     private final OfferService offerService;
     private final ModelMapper modelMapper;
 
@@ -28,34 +25,27 @@ public class OffersController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/all")
-    public String allOffers(Model model) {
-        model.addAttribute("offer", offerService.getAllOffers());
-        return "offers";
-    }
-
     @ModelAttribute
-    public OfferBindingModel offerBindingModel() {
-        return new OfferBindingModel();
+    private OfferAddBindingModel offerAddBindingModel() {
+        return new OfferAddBindingModel();
     }
 
     @GetMapping("/add")
-    public String addOffer(Model model) {
-
-            return "add-offer";
+    public String add() {
+        return "add-offer";
     }
 
     @PostMapping("/add")
-    public String addOffer(@Valid OfferBindingModel offerBindingModel,
-                           BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+    public String add(@Valid OfferAddBindingModel offerAddBindingModel,
+                      BindingResult bindingResult,
+                      RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("offerBindingModel", offerBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("offerAddBindingModel", offerAddBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerAddBindingModel", bindingResult);
+
             return "redirect:/offers/add";
         }
-        offerService.addOffer(modelMapper.map(offerBindingModel, OfferServiceModel.class));
+        offerService.addOffer(modelMapper.map(offerAddBindingModel, OfferServiceModel.class));
         return "redirect:/";
     }
 }
-

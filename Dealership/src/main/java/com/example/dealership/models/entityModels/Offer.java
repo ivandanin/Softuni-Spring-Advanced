@@ -7,7 +7,11 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "offers")
-public class Offer extends BaseEntity {
+public class Offer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(columnDefinition = "LONGTEXT")
     private String description;
@@ -29,6 +33,15 @@ public class Offer extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private ModelEntity model;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Offer setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getDescription() {
         return description;
