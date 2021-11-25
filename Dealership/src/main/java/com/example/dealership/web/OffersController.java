@@ -5,11 +5,9 @@ import com.example.dealership.models.serviceModels.OfferServiceModel;
 import com.example.dealership.services.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -47,5 +45,17 @@ public class OffersController {
         }
         offerService.addOffer(modelMapper.map(offerAddBindingModel, OfferServiceModel.class));
         return "redirect:/";
+    }
+
+    @GetMapping("/all")
+    public String allOffers(Model model) {
+        model.addAttribute("offersViewModel", offerService.getAllOffers());
+        return "offers";
+    }
+
+    @GetMapping("/{id}/details")
+    public String offerDetails(@PathVariable Long id, Model model) {
+        model.addAttribute("offer", offerService.findById(id));
+        return "details";
     }
 }
