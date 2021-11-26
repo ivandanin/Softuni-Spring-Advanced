@@ -18,12 +18,9 @@
 </head><body>
 <header th:fragment="navigation">
     <nav class="main-nav">
-            <h1 class="border-bottom mb-5">Forecast</h1>
+            <h1 class="text-center text-white">Forecast</h1>
         <ul>
              <th:block th:if="${@currentUser.id == null}">
-                <li>
-                    <a href="/">Home</a>
-                </li>
                 <li>
                     <a th:href="@{/users/login}">Login</a>
                 </li>
@@ -32,10 +29,13 @@
                 </li>
                 </th:block>
                 <th:block th:unless="${@currentUser.id == null}">
-                <li>
-                    <a th:href="@{/users/profile/{id}(id = *{@currentUser.id})}">
-                        Profile</a>
-                </li>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+<!--                <li>-->
+<!--                    <a th:href="@{/users/profile/{id}(id = *{@currentUser.id})}">-->
+<!--                        Profile</a>-->
+<!--                </li>-->
             <li><a>24-hour</a></li>
             <li><a>Today</a></li>
             <li><a>3 days</a></li>
@@ -46,10 +46,10 @@
                     <a th:href="@{/users/logout}">Logout</a>
                 </li>
             </th:block>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+<!--                    <form class="d-flex">-->
+<!--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                        <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                    </form> -->
         </ul>
     </nav>
 </header>

@@ -1,12 +1,10 @@
 package com.example.mobilele.web;
 
-import com.example.mobilele.models.bindingModels.OfferAddBindingModel;
 import com.example.mobilele.models.bindingModels.OfferUpdateBindingModel;
 import com.example.mobilele.models.entityModels.enums.EngineEnum;
 import com.example.mobilele.models.entityModels.enums.TransmissionEnum;
 import com.example.mobilele.models.serviceModels.OfferUpdateServiceModel;
 import com.example.mobilele.models.viewModels.OfferDetailsView;
-import com.example.mobilele.services.BrandService;
 import com.example.mobilele.services.OfferService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +20,12 @@ import javax.validation.Valid;
 public class OffersController {
 
     private final OfferService offerService;
-    private final ModelMapper modelMapper;
-    private final BrandService brandService;
 
-    public OffersController(OfferService offerService, ModelMapper modelMapper, BrandService brandService) {
+    private final ModelMapper modelMapper;
+
+    public OffersController(OfferService offerService, ModelMapper modelMapper) {
         this.offerService = offerService;
         this.modelMapper = modelMapper;
-        this.brandService = brandService;
     }
 
     @GetMapping("/offers/all")
@@ -75,8 +72,7 @@ public class OffersController {
             return "redirect:/offers/" + id + "/edit/errors";
         }
 
-        OfferUpdateServiceModel serviceModel = modelMapper
-                .map(offerModel, OfferUpdateServiceModel.class);
+        OfferUpdateServiceModel serviceModel = modelMapper.map(offerModel, OfferUpdateServiceModel.class);
         serviceModel.setId(id);
 
         offerService.updateOffer(serviceModel);
@@ -89,14 +85,5 @@ public class OffersController {
         model.addAttribute("engines", EngineEnum.values());
         model.addAttribute("transmissions", TransmissionEnum.values());
         return "update";
-    }
-
-    @GetMapping("/offers/add")
-    public String getAddOfferPage(Model model) {
-        if (!model.containsAttribute("offerAddBindingModel")) {
-            model.addAttribute("offerAddBindingModel", new OfferAddBindingModel())
-                    .addAttribute("brandsModels", brandService.getAllBrands());
-        }
-        return "offer-add";
     }
 }
