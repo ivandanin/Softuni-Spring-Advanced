@@ -3,6 +3,7 @@ package com.example.forecast.web;
 import com.example.forecast.models.bindingModels.LoginBindingModel;
 import com.example.forecast.models.serviceModels.UserServiceModel;
 import com.example.forecast.services.UserService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,27 +36,16 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@Valid LoginBindingModel loginBindingModel,
-                        BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes) {
+    @PostMapping("/login-error")
+    public String failedLogin(
+            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+                    String userName,
+            RedirectAttributes attributes
+    ) {
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("loginBindingModel", loginBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginBindingModel", bindingResult);
+        attributes.addFlashAttribute("bad_credentials", true);
+        attributes.addFlashAttribute("username", userName);
 
-            return "redirect:login";
-        }
-        UserServiceModel user = userService.findByUsernameAndPassword(loginBindingModel.getUsername(), loginBindingModel.getPassword());
-
-        if (user == null) {
-            redirectAttributes.addFlashAttribute("exists", false)
-                    .addFlashAttribute("loginBindingModel", loginBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.loginBindingModel", loginBindingModel);
-
-            return "redirect:login";
-        }
-        userService.login(user.getId(), user.getUsername());
-        return "redirect:/";
+        return "redirect:/users/login";
     }
 }

@@ -4,7 +4,6 @@ import com.example.forecast.models.entityModels.User;
 import com.example.forecast.models.serviceModels.UserServiceModel;
 import com.example.forecast.repositories.UserRepository;
 import com.example.forecast.services.UserService;
-import com.example.forecast.user.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +12,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final CurrentUser currentUser;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, CurrentUser currentUser) {
+
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.currentUser = currentUser;
+
     }
 
     @Override
@@ -28,18 +27,6 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
     }
 
-    @Override
-    public void login(Long id, String username) {
-        currentUser.setId(id);
-        currentUser.setUsername(username);
-    }
-
-    @Override
-    public void logout() {
-        currentUser
-                .setId(null)
-                .setUsername(null);
-    }
 
     @Override
     public boolean register(UserServiceModel registerServiceModel) {

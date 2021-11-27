@@ -20,7 +20,7 @@
     <nav class="main-nav">
             <h1 class="text-center text-white">Forecast</h1>
         <ul>
-             <th:block th:if="${@currentUser.id == null}">
+             <th:block >
                 <li>
                     <a th:href="@{/users/login}">Login</a>
                 </li>
@@ -28,12 +28,12 @@
                     <a th:href="@{/users/register}">Register</a>
                 </li>
                 </th:block>
-                <th:block th:unless="${@currentUser.id == null}">
+                <th:block >
                     <li>
                         <a href="/">Home</a>
                     </li>
 <!--                <li>-->
-<!--                    <a th:href="@{/users/profile/{id}(id = *{@currentUser.id})}">-->
+<!--                    <a>-->
 <!--                        Profile</a>-->
 <!--                </li>-->
             <li><a>24-hour</a></li>

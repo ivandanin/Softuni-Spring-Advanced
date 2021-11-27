@@ -1,7 +1,11 @@
 package com.example.forecast.models.entityModels;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -11,6 +15,18 @@ public class User extends BaseEntity{
     private String email;
     private String name;
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<UserRole> roles = new HashSet<>();
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public User setRoles(Set<UserRole> roles) {
+        this.roles = roles;
+        return this;
+    }
 
     public String getUsername() {
         return username;
