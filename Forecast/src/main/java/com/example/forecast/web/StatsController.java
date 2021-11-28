@@ -18,8 +18,8 @@ public class StatsController {
     public ModelAndView statistics() {
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.addObject("stats", statsService.getStats());
-        modelAndView.setViewName("stats");
+        modelAndView.addObject("statistics", statsService.getStats());
+        modelAndView.setViewName("statistics");
         return modelAndView;
     }
 }

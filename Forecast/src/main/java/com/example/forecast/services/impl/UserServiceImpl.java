@@ -112,4 +112,9 @@ public class UserServiceImpl implements UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    @Override
+    public boolean isUsernameFree(String username) {
+        return false;
     }
+
+}

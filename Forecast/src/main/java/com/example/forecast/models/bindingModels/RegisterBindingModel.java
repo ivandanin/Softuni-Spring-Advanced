@@ -1,15 +1,32 @@
 package com.example.forecast.models.bindingModels;
 
+import com.example.forecast.models.validation.UniqueUsername;
+
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class RegisterBindingModel {
 
+    @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 symbols!")
+    @UniqueUsername
+    @NotNull
     private String username;
+
+    @Size(min = 2, max = 20, message = "Name length must be between 2 and 20 symbols!")
+    @NotNull
     private String name;
 
     @Email
+    @NotNull
     private String email;
+
+    @Size(min = 5, message = "Password length must be at least 5 symbols!")
+    @NotNull
     private String password;
+
+    @Size(min = 5, message = "Confirm password must match password!")
+    @NotNull
     private String confirmPassword;
 
     public String getUsername() {
