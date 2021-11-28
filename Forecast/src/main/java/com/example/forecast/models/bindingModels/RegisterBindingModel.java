@@ -1,9 +1,13 @@
 package com.example.forecast.models.bindingModels;
 
+import javax.validation.constraints.Email;
+
 public class RegisterBindingModel {
 
     private String username;
     private String name;
+
+    @Email
     private String email;
     private String password;
     private String confirmPassword;

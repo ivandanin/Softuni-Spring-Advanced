@@ -47,7 +47,7 @@ public class RegisterController {
 
             return "redirect:register";
         }
-        userService.register(modelMapper.map(registerBindingModel, UserServiceModel.class));
+        userService.registerAndLogin(modelMapper.map(registerBindingModel, UserServiceModel.class));
         return "redirect:login";
     }
 }
